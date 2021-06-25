@@ -13,7 +13,8 @@ router.post('/deleteOneUser', user.deleteOneData);
 //API KELAS
 router.get('/getkelas',kelas.getAllData );
 router.post('/addOneKelas', kelas.addOneData);
-
+router.post('/editOnedata', kelas.editOneData);
+router.post('/deleteOnekelas', kelas.deleteOneData);
 
 
 //API Laporan SPP

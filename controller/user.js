@@ -87,7 +87,7 @@ let addOneData = (req, res) => {
  let deleteOneData = (req, res) => {
     let idUser = req.body.idUser
 
-    let qry = `DELETE FROM artikel WHERE  = '${idUser}'`
+    let qry = `DELETE FROM artikel WHERE idUser = '${idUser}'`
 
     connection.query(qry, (error, result) => {
      if (error) {
