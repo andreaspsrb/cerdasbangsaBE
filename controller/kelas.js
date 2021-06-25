@@ -73,7 +73,7 @@ connection.query(qry, (error, result) => {
 })
 }
 
-mo =dule.exports = {
+module.exports = {
     getAllData,
     addOneData,
     editOneData,
