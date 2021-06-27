@@ -45,7 +45,8 @@ let editOneData = (req, res) => {
     let qry = `UPDATE Kelas
         Set nama_kelas = '${nama_kelas}',
             kode_kelas = '${kode_kelas}',
-            nama_guru = '${nama_guru}'`
+            nama_guru = '${nama_guru}'
+        WHERE kode_kelas= '${kode_kelas}'`
 
 connection.query(qry, (error, result)=>{
     if (error) {
@@ -59,7 +60,7 @@ connection.query(qry, (error, result)=>{
 }
 
 let deleteOneData = (req, res) => {
-    let nama_kelas = req.Body.nama_kelas
+    let nama_kelas = req.body.nama_kelas
 
     let qry = `DELETE FROM Kelas WHERE nama_kelas = '${nama_kelas}'`
 
