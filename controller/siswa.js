@@ -18,6 +18,7 @@ let getAllData = (req, res) => {
 let addOneData = (req, res) => {
 
     let{
+        id_user,
         nis,
         nisn,
         nama_siswa,
@@ -28,13 +29,13 @@ let addOneData = (req, res) => {
         nama_orangtua,
         no_hp1,
         no_hp2,
-        agama,
-        id_user,
+        agama
+       
     } = req.body
 
-    let qry = `INSERT INTO siswa VALUES('${nis}', '${nisn}', '${nama_siswa}', '${jenis_kelamin}', '${tgl_lahir}',
+    let qry = `INSERT INTO siswa VALUES('${id_user}','${nis}', '${nisn}', '${nama_siswa}', '${jenis_kelamin}', '${tgl_lahir}',
     '${tempat_lahir}', '${alamat}', '${nama_orangtua}', '${no_hp1}', '${no_hp2}',
-    '${agama}', '${id_user}')`
+    '${agama}')`
 
 connection.query(qry, (error, result) =>{
     if (error) {
@@ -74,7 +75,8 @@ let editOneData = (req, res) => {
             no_hp1 = '${no_hp1}',
             no_hp2 = '${no_hp2}',
             agama = '${agama}',
-            id_user = '${id_user}'`
+            id_user = '${id_user}'
+        WHERE nis = '${nis}'`
 
 connection.query(qry, (error, result)=>{
     if (error) {
@@ -88,16 +90,16 @@ connection.query(qry, (error, result)=>{
 }
 
 let deleteOneData = (req, res) => {
-    let nisn = req.Body.nisn
+    let nis = req.Body.nis
 
-    let qry = `DELETE FROM siswa WHERE nisn = '${nisn}'`
+    let qry = `DELETE FROM siswa WHERE nis = '${nis}'`
 
 connection.query(qry, (error, result) => {
     if (error) {
         console.log(error);
     } else {
         response.ok('Data Berhasil Dihapus', res)
-        console.log(`Data Siswa ${nama_kelas} Berhasil dihapus`);
+        console.log(result.affectedRows, 'Berhasil dihapus');
     }
 })
 }

@@ -4,7 +4,7 @@ let connection = require('../config/connect');
 
 let getAllData = (req, res) => {
     
-    let qry = 'SELECT * FROM guru';
+    let qry = 'SELECT * FROM Guru';
     connection.query(qry, (error, result) =>{
         if (error){
             console.log(error);
@@ -31,22 +31,29 @@ let addOneData = (req, res) => {
         id_user,
     } = req.body
 
-    let qry = `INSERT INTO guru VALUES('${nama_guru}', '${jenis_kelamin}', '${no_nuptk}', '${tempat_lahir}', '${tgl_lahir}',
-    '${pendidikan}', '${lulusan}', '${jabatan}', '${status_karyawan}', '${agama}','${id_user}')`
+   let query = `INSERT INTO Guru
+  (nama_guru, jenis_kelamin, no_nuptk,
+   tempat_lahir, tgl_lahir, pendidikan,
+    lulusan, jabatan, status_karyawan, agama,
+     id_user) 
+     VALUES 
+     ('${nama_guru}', '${jenis_kelamin}', '${no_nuptk}', 
+     '${tempat_lahir}', '${tgl_lahir}', '${pendidikan}', '${lulusan}',
+      '${jabatan}', '${status_karyawan}', '${agama}', '${id_user}')`
 
-
-connection.query(qry, (error, result) =>{
+connection.query(query, (error, result) =>{
     if (error) {
         console.log(error);
     } else {
         response.ok(result, res)
-        console.log(`Data Kelas ${nama_kelas} berhasil ditambahkan`);
+        console.log(`Data guru ${nama_guru} berhasil ditambahkan`);
     }
 })
 }
 
 let editOneData = (req, res) => {
     let{
+        id_guru,
         nama_guru,
         jenis_kelamin,
         no_nuptk,
@@ -60,10 +67,10 @@ let editOneData = (req, res) => {
         id_user,
     } = req.body
 
-    let qry = `UPDATE Kelas
+    let qry = `UPDATE Guru
         Set nama_guru = '${nama_guru}',
             jenis_kelamin = '${jenis_kelamin}',
-            no_unptk = '${no_nuptk}',
+            no_nuptk = '${no_nuptk}',
             tempat_lahir= '${tempat_lahir}',
             tgl_lahir = '${tgl_lahir}',
             pendidikan = '${pendidikan}',
@@ -71,7 +78,8 @@ let editOneData = (req, res) => {
             jabatan = '${jabatan}',
             status_karyawan = '${status_karyawan}',
             agama = '${agama}',
-            id_user = '${id_user}'`
+            id_user = '${id_user}'
+            WHERE id_guru ='${id_guru}'`
 
 connection.query(qry, (error, result)=>{
     if (error) {
@@ -85,16 +93,16 @@ connection.query(qry, (error, result)=>{
 }
 
 let deleteOneData = (req, res) => {
-    let nama_kelas = req.Body.nama_kelas
+    let id_guru = req.body.id_guru
 
-    let qry = `DELETE FROM Guru WHERE id_user = '${id_user}'`
+    let qry = `DELETE FROM Guru WHERE id_guru = '${id_guru}'`
 
 connection.query(qry, (error, result) => {
     if (error) {
         console.log(error);
     } else {
         response.ok('Data Berhasil Dihapus', res)
-        console.log(`Data guru ${id_user} Berhasil dihapus`);
+        console.log(`Data guru ${id_guru} Berhasil dihapus`);
     }
 })
 }
