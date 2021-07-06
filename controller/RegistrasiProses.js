@@ -32,6 +32,80 @@ let addFirstRegist = (req, res) => {
     no_hp,
   } = req.body
 
+      if (nama_siswa.length == 0) {
+        let ress = {
+            status: 'error',
+            error: 'kolom nama kosong',
+        }
+
+        res.send(ress);
+        return;
+    }
+  
+    if (agama.length == 0) {
+      let ress = {
+          status: 'error',
+          error: 'kolom agama kosong',
+      }
+
+      res.send(ress);
+      return;
+    }
+
+    if (tgl_lahir.length == 0) {
+      let ress = {
+          status: 'error',
+          error: 'kolom tanggal lahir kosong',
+      }
+
+      res.send(ress);
+      return;
+    }
+
+
+    if (tempat_lahir.length == 0) {
+      let ress = {
+          status: 'error',
+          error: 'kolom tempat lahir kosong',
+      }
+
+      res.send(ress);
+      return;
+    }
+
+
+    if (alamat.length == 0) {
+      let ress = {
+          status: 'error',
+          error: 'kolom alamat kosong',
+      }
+
+      res.send(ress);
+      return;
+    }
+
+
+      if (no_hp == 0) {
+        let ress = {
+            status: 'error',
+            error: 'kolom no hp kosong',
+        }
+        res.send(ress);
+        return;
+      } else if (response.checknumber(no_hp) = false) {
+
+        let ress = {
+          status: 'error',
+          error: 'kolom no hp bukan angka',
+        }
+          res.send(ress);
+          return;
+      }
+  
+      
+
+
+
 let qry = `INSERT INTO siswa (nama_siswa, jenis_kelamin, agama, tgl_lahir, tempat_lahir, alamat, no_hp, ms_status, ms_registrasi) 
 VALUES ('${nama_siswa}', '${jenis_kelamin}', '${agama}', '${tgl_lahir}', '${tempat_lahir}', '${alamat}', '${no_hp}', '10', '10')`
 
@@ -41,7 +115,7 @@ connection.query(qry, (error, result) =>{
       console.log(error);
   } else {
       response.ok(result, res)
-      console.log(`Data guru ${nama_guru} berhasil ditambahkan`);
+      console.log(`Data guru ${nama_siswa} berhasil ditambahkan`);
   }
 })
 }
