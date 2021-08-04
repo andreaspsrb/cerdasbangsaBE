@@ -1,7 +1,12 @@
 'use strict';
 let response = require('../res/res');
 let connection = require('../config/connect');
- 
+const multer = require('multer')
+ const upload = multer({
+     dest:'public/img/spp'
+ })
+
+exports.uploadImage = upload.single('photo');
 
 let getAllData = (req, res) => {
 
@@ -73,9 +78,39 @@ let addOneData = (req, res) => {
  
  }
 
+let insertImage = (req, res) => {
+
+    let{
+        kode_spp,
+        image
+        } = req.body
+       
+       try {
+
+
+        let qry = `INSERT INTO LaporanSPP (kode_spp, image) 
+        VALUES ('${kode_spp}', '${image}')`;
+    
+    connection.query(qry, (error, result, rows) => {
+     if (error) {
+         console.log(error);
+     } else {
+         response.ok(result, res)
+         console.log(`Data ${nama_siswa} berhasil ditambahkan`);
+
+     }
+ }) 
+       } catch (err) {
+            console.log(err);
+       }
+     
+ 
+ }
+
 
  module.exports = {
      getAllData,
      getOneByKode,
-     addOneData
+     addOneData,
+     insertImage
  }
