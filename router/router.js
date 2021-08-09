@@ -5,6 +5,7 @@ const kelas = require("../controller/kelas");
 const lspp = require("../controller/LSPP");
 const siswa = require("../controller/siswa");
 const guru = require("../controller/guru");
+const lcicilan = require("../controller/Lcicilan");
 const RegistrasiProses = require("../controller/RegistrasiProses");
 // API USER
 router.get("/getuser", user.getAllData);
@@ -35,6 +36,12 @@ router.get("/getLaporanSPP", lspp.getAllData);
 router.post("/getSPPbyKode", lspp.getOneByKode);
 router.post("/addOneLaporanSPP", lspp.addOneData);
 router.post("/uploadImgSPP", lspp.insertImage)
+
+//API Laporan Cicilan
+router.get("/getLaporanCicilan", lcicilan.getAllData);
+router.post("/getCicilanbyKode", lcicilan.getOneByKode);
+router.post("/addOneLaporanCicilan", lcicilan.addOneData);
+router.post("/uploadImgCicilan", lcicilan.insertImage)
 
 // LOGIN
 // REGISTRASI AKUN
