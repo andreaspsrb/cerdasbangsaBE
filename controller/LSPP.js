@@ -64,7 +64,7 @@ let addOneData = (req, res) => {
             '${status}',
             '${image}',
             '${nama_siswa}',
-            '${kelas}',)`
+            '${kelas}')`
     
     connection.query(qry, (error, result, rows) => {
      if (error) {
