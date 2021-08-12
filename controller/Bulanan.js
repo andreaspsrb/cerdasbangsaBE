@@ -11,7 +11,7 @@ exports.uploadImage = upload.single('photo');
 let getAllData = (req, res) => {
 
     let qry = 'SELECT * FROM LaporanBulanan';
-    connection.query(qry, (error, result, rows) => {
+    connection.query(qry, (error, result) => {
      if (error) {
          console.log(error);
      } else {
@@ -55,7 +55,12 @@ let addOneData = (req, res) => {
        
        
         let qry = `INSERT INTO LaporanBulanan
-        VALUES('${kode_laporan}',
+        ( kode_laporan,tgl,
+            keterangan,debit,
+            kredit,saldo,
+            jumlah, status )
+        VALUES
+        ('${kode_laporan}',
             '${tgl}',
             '${keterangan}',
             '${debit}',
@@ -69,12 +74,60 @@ let addOneData = (req, res) => {
          console.log(error);
      } else {
          response.ok(result, res)
-         console.log(`Data ${nama} berhasil ditambahkan`);
+         console.log(`Data Laporan ${kode_laporan} berhasil ditambahkan`);
 
      }
  })
  
  }
+
+ let editOneData = (req, res) => {
+    let{ kode_laporan,
+        tgl,
+        keterangan,
+        debit,
+        kredit,
+        saldo,
+        jumlah,
+        status,
+    } = req.body
+
+    let qry = `UPDATE LaporanBulanan
+        Set tgl =  '${tgl}',
+            keterangan = '${keterangan}',
+            debit = '${debit}',
+            kredit = '${kredit}',
+            saldo = '${saldo}',
+            jumlah = '${jumlah}',
+            status = '${status}'
+            WHERE kode_laporan ='${kode_laporan}'`
+
+connection.query(qry, (error, result)=>{
+    if (error) {
+        console.log(error);
+    } else {
+        response.ok('Data berhasil diubah', res)
+        console.log(result.affectedRows, 'Data Berhasil diubah');
+    }
+}
+)
+}
+
+let deleteOneData = (req, res) => {
+    let kode_laporan = req.body.kode_laporan
+
+    let qry = `DELETE FROM LaporanBulanan WHERE kode_laporan = '${kode_laporan}'`
+
+connection.query(qry, (error, result) => {
+    if (error) {
+        console.log(error);
+    } else {
+        response.ok('Data Berhasil Dihapus', res)
+        console.log(`Data Laporan ${kode_laporan} Berhasil dihapus`);
+    }
+})
+}
+
 
 let insertImage = (req, res) => {
 
@@ -110,5 +163,7 @@ let insertImage = (req, res) => {
      getAllData,
      getOneByKode,
      addOneData,
+     editOneData,
+     deleteOneData,
      insertImage
  }

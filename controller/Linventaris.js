@@ -55,6 +55,10 @@ let addOneData = (req, res) => {
        
        
         let qry = `INSERT INTO LaporanInventaris
+        ( kode_inventaris,tgl_pembelian,
+            keterangan,	jumlah,
+            catatan,tahun_ajaran,
+            wali_kelas,image)
         VALUES('${kode_inventaris}',
             '${tgl_pembelian}',
             '${keterangan}',	
@@ -64,17 +68,64 @@ let addOneData = (req, res) => {
             '${wali_kelas}',
             '${image}')`
     
-    connection.query(qry, (error, result, rows) => {
+    connection.query(qry, (error, result) => {
      if (error) {
          console.log(error);
      } else {
          response.ok(result, res)
-         console.log(`Data ${nama_siswa} berhasil ditambahkan`);
+         console.log(`Data ${kode_inventaris} berhasil ditambahkan`);
 
      }
  })
- 
  }
+
+ let editOneData = (req, res) => {
+    let{
+        kode_inventaris,
+        tgl_pembelian,
+        keterangan,	
+        jumlah,
+        catatan,
+        tahun_ajaran,
+        wali_kelas,
+        image,
+    } = req.body
+
+    let qry = `UPDATE LaporanInventaris
+        Set tgl_pembelian = '${tgl_pembelian}',
+            keterangan = '${keterangan}',	
+            jumlah = '${jumlah}',
+            catatan = '${catatan}',
+            tahun_ajaran = '${tahun_ajaran}',
+            wali_kelas = '${wali_kelas}',
+            image = '${image}'
+            WHERE kode_inventaris ='${kode_inventaris}'`
+
+connection.query(qry, (error, result)=>{
+    if (error) {
+        console.log(error);
+    } else {
+        response.ok('Data berhasil diubah', res)
+        console.log(result.affectedRows, 'Data Berhasil diubah');
+    }
+}
+)
+}
+
+let deleteOneData = (req, res) => {
+    let kode_inventaris = req.body.kode_inventaris
+
+    let qry = `DELETE FROM LaporanInventaris WHERE kode_inventaris = '${kode_inventaris}'`
+
+connection.query(qry, (error, result) => {
+    if (error) {
+        console.log(error);
+    } else {
+        response.ok('Data Berhasil Dihapus', res)
+        console.log(`Data Inventaris ${kode_inventaris} Berhasil dihapus`);
+    }
+})
+}
 
 let insertImage = (req, res) => {
 
@@ -84,8 +135,6 @@ let insertImage = (req, res) => {
         } = req.body
        
        try {
-
-
         let qry = `INSERT INTO LaporanInventaris (kode_inventaris, image) 
         VALUES ('${kode_inventaris}', '${image}')`;
     
@@ -94,7 +143,7 @@ let insertImage = (req, res) => {
          console.log(error);
      } else {
          response.ok(result, res)
-         console.log(`Data ${nama_siswa} berhasil ditambahkan`);
+         console.log(`Data ${kode_inventaris} berhasil ditambahkan`);
 
      }
  }) 
@@ -110,5 +159,7 @@ let insertImage = (req, res) => {
      getAllData,
      getOneByKode,
      addOneData,
+     editOneData,
+     deleteOneData,
      insertImage
  }
