@@ -56,9 +56,6 @@ let addOneData = (req, res) => {
        
        
         let qry = `INSERT INTO LaporanSPP
-        (kode_spp, tgl_bayar, bulan,	
-            jumlah, ekstrakurikuler,
-            status, image ,nama_siswa, kelas,)
         VALUES('${kode_spp}',
             '${tgl_bayar}',
             '${bulan}',	
@@ -97,7 +94,7 @@ let addOneData = (req, res) => {
         Set tgl_bayar = '${tgl_bayar}',
             bulan = '${bulan}',	
             jumlah = '${jumlah}',
-            kstrakurikuler = '${ekstrakurikuler}',
+            ekstrakurikuler = '${ekstrakurikuler}',
             status = '${status}',
             image = '${image}',
             nama_siswa = '${nama_siswa}',
