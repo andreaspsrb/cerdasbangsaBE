@@ -35,7 +35,8 @@ router.post("/deleteoneguru", guru.deleteOneData);
 router.get("/getLaporanSPP", lspp.getAllData);
 router.post("/getSPPbyKode", lspp.getOneByKode);
 router.post("/addOneLaporanSPP", lspp.addOneData);
-router.post("/uploadImgSPP", lspp.insertImage)
+router.post("/uploadImgSPP", lspp.insertImage);
+router.post("/deleteonespp",lspp.deleteOneData);
 
 //API Laporan Cicilan
 router.get("/getLaporanCicilan", lcicilan.getAllData);

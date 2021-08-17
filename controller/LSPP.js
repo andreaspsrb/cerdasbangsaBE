@@ -1,6 +1,7 @@
 'use strict';
 let response = require('../res/res');
 let connection = require('../config/connect');
+const random = require('random-number')
 const multer = require('multer')
  const upload = multer({
      dest:'public/img/spp'
@@ -40,9 +41,16 @@ let getAllData = (req, res) => {
 
 
 let addOneData = (req, res) => {
+    let kode_spp = random.generator({
+        min:  0,
+        max:9999,
+        integer:true,
+    })
+
+    
+   
 
     let{
-        kode_spp,
         tgl_bayar,
         bulan,	
         jumlah,
@@ -56,7 +64,7 @@ let addOneData = (req, res) => {
        
        
         let qry = `INSERT INTO LaporanSPP
-        VALUES('${kode_spp}',
+        VALUES('${kode_spp()}',
             '${tgl_bayar}',
             '${bulan}',	
             '${jumlah}',
