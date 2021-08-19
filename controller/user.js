@@ -101,6 +101,36 @@ let addOneData = (req, res) => {
  
  }
 
+ let login = (req, res) => {
+    let { username,
+         password } = req.body
+ 
+     let qry = `SELECT username, password FROM User WHERE username = '${username}' AND password = '${password}'`
+ 
+     connection.query(qry, (error, result) => {
+      if (result.length > 0) {
+          
+         let data = {
+             'status': 200,
+             'message' :'success',
+             'values': result
+         };
+         res.json(data);
+         res.end();
+      } else {
+         let error = {
+             'status': 500,
+             'message' :'error',
+             'values': 'tidak berhasil login'
+         };
+         res.json(error);
+         res.end();
+      }
+  })
+  
+  }
+
+
 
 
 
@@ -109,6 +139,7 @@ module.exports = {
     getOneData,
     addOneData,
     editOneData,
+    login,
     deleteOneData
 
 

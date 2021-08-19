@@ -15,6 +15,22 @@ let getAllData = (req, res) => {
     })
 }
 
+let getOneByKode = (req, res) => {
+
+    let id_user = req.body.id_user    
+ 
+     let qry = `SELECT * FROM siswa WHERE id_user = '${id_user}'`;
+         connection.query(qry, (error, result) => {
+          if (error) {
+              console.log(error);
+          } else {
+              response.ok(result, res)
+            console.log(result);
+          }
+      })
+      
+      }
+
 let addOneData = (req, res) => {
 
     let{
@@ -108,6 +124,7 @@ module.exports = {
     getAllData,
     addOneData,
     editOneData,
+    getOneByKode,
     deleteOneData
 
 }
