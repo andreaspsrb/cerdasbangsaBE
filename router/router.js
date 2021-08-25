@@ -12,6 +12,8 @@ router.get("/getuser", user.getAllData);
 router.post("/addOneUser", user.addOneData);
 router.post("/editOneUser", user.editOneData);
 router.post("/deleteOneUser", user.deleteOneData);
+router.post("/login", user.login);
+
 
 //API KELAS
 router.get("/getkelas", kelas.getAllData);
