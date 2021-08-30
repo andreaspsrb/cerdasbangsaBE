@@ -16,12 +16,10 @@ let getAllData = (req, res) => {
 })
 
 }
-
 let getOneData = (req, res) => {
-
-let user = req.body.user
+let username = req.body.username
     
-let qry = `SELECT * FROM user WHERE user = '${user}'`;
+let qry = `SELECT * FROM user WHERE user = '${username}'`;
     connection.query(qry, (error, result, rows) => {
      if (error) {
          console.log(error);
@@ -36,21 +34,21 @@ let qry = `SELECT * FROM user WHERE user = '${user}'`;
 let addOneData = (req, res) => {
 
     let{
-        user,
+        username,
         password,
         level,
         } = req.body
        
        
         let qry = `INSERT INTO user ( user, password, level) 
-        VALUES('${user}', '${password}', '${level}')`
+        VALUES('${username}', '${password}', '${level}')`
     
     connection.query(qry, (error, result, rows) => {
      if (error) {
          console.log(error);
      } else {
          response.ok(result, res)
-         console.log(`Data ${user} berhasil ditambahkan`);
+         console.log(`Data ${username} berhasil ditambahkan`);
 
      }
  })
@@ -60,13 +58,13 @@ let addOneData = (req, res) => {
  let editOneData = (req, res) => {
     let{
         idUser,
-        user,
+        username,
         password,
         level,
         } = req.body
        
         let qry = `UPDATE user 
-           SET user = '${user}',
+           SET user = '${username}',
            password = '${password}',
            level = '${level}'
             WHERE idUser = '${idUser}'`
@@ -105,11 +103,10 @@ let addOneData = (req, res) => {
     let { username,
          password } = req.body
  
-     let qry = `SELECT username, password FROM User WHERE username = '${username}' AND password = '${password}'`
+     let qry = `SELECT username, password, role FROM User WHERE username = '${username}' AND password = '${password}'`
  
      connection.query(qry, (error, result) => {
       if (result.length > 0) {
-          
          let data = {
              'status': 200,
              'message' :'success',

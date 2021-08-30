@@ -9,8 +9,10 @@ const lcicilan = require("../controller/Lcicilan");
 const inventaris = require("../controller/Linventaris");
 const bulanan = require("../controller/Bulanan");
 const RegistrasiProses = require("../controller/RegistrasiProses");
+// const {upload, uploadImage} = require("../controller/upload")
 // API USER
 router.get("/getuser", user.getAllData);
+router.post("/getonedata", user.getOneData)
 router.post("/addOneUser", user.addOneData);
 router.post("/editOneUser", user.editOneData);
 router.post("/deleteOneUser", user.deleteOneData);
@@ -89,5 +91,7 @@ router.post("/deleteRegist", RegistrasiProses.deleteRegist);
 // MONITORING LAPORAN BULANAN
 
 //NOTIF CONFIRMATION
+
+// router.post("/upload", uploadImage, upload);
 
 module.exports = router;
