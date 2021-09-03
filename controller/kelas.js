@@ -42,10 +42,10 @@ let editOneData = (req, res) => {
         nama_guru,
     } = req.body
 
-    let qry = `UPDATE Kelas
-        Set nama_kelas = '${nama_kelas}',
-            kode_kelas = '${kode_kelas}',
-            nama_guru = '${nama_guru}'
+    let qry = `UPDATE kelas
+        SET nama_kelas = '${nama_kelas}',
+        kode_kelas = '${kode_kelas}',
+        nama_guru = '${nama_guru}'
             WHERE kode_kelas= '${kode_kelas}'`
 
 connection.query(qry, (error, result)=>{

@@ -9,7 +9,9 @@ const lcicilan = require("../controller/Lcicilan");
 const inventaris = require("../controller/Linventaris");
 const bulanan = require("../controller/Bulanan");
 const RegistrasiProses = require("../controller/RegistrasiProses");
-// const {upload, uploadImage} = require("../controller/upload")
+const buku = require("../controller/buku");
+
+
 // API USER
 router.get("/getuser", user.getAllData);
 router.post("/getonedata", user.getOneData)
@@ -27,7 +29,7 @@ router.post("/deleteOnekelas", kelas.deleteOneData);
 //API SISWA
 router.get('/getSiswa', siswa.getAllData );
 router.post('/addOneSiswa', siswa.addOneData);
-router.post('/editOnedata', siswa.editOneData);
+router.post('/editOneSiswa', siswa.editOneData);
 router.post("/getSPPbyKode", lspp.getOneByKode);
 router.post('/deleteOnesiswa', siswa.deleteOneData);
 
@@ -69,6 +71,13 @@ router.post("/editonebulanan", bulanan.editOneData);
 router.post("/deleteonebulanan", bulanan.deleteOneData);
 router.post("/uploadImgBulanan", bulanan.insertImage)
 
+//API Buku
+router.get("/getbuku", buku.getAllData);
+router.post("/getbukubyKode", buku.getOneByKode);
+router.post("/addOnebuku", buku.addOneData);
+router.post("/editonebuku", buku.editOneData);
+router.post("/deleteonebuku", buku.deleteOneData);
+router.post("/uploadImgbuku", buku.insertImage)
 // LOGIN
 // REGISTRASI AKUN
 // REGISTRASI SISWA BARU

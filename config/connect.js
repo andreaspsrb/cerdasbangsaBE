@@ -3,10 +3,10 @@ let dotenv = require('dotenv');
 let env = dotenv.config();
 const mysql2 = require('mysql2');
 const conn = mysql2.createConnection({
-    host: process.env.vps_HOST,
-    user: process.env.vps_USERNAME,
-    password: process.env.vps_PASSWORD,
-    database: process.env.vps_DATABASE,
+    host: process.env.local_HOST,
+    user: process.env.local_USERNAME,
+    password: process.env.local_PASSWORD,
+    database: process.env.local_DATABASE,
 })
 
 

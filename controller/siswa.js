@@ -32,9 +32,7 @@ let getOneByKode = (req, res) => {
       }
 
 let addOneData = (req, res) => {
-
     let{
-        id_user,
         nis,
         nisn,
         nama_siswa,
@@ -42,15 +40,34 @@ let addOneData = (req, res) => {
         tgl_lahir,
         tempat_lahir,
         alamat,
-        nama_orangtua,
-        no_hp1,
-        no_hp2,
-        agama
-       
+        nama_ayah,
+        nama_ibu,
+        no_hp,
+        agama,
     } = req.body
 
-    let qry = `INSERT INTO siswa VALUES('${id_user}','${nis}', '${nisn}', '${nama_siswa}', '${jenis_kelamin}', '${tgl_lahir}',
-    '${tempat_lahir}', '${alamat}', '${nama_orangtua}', '${no_hp1}', '${no_hp2}',
+    let qry = `INSERT INTO siswa ( nis,
+        nisn,
+        nama_siswa,
+        jenis_kelamin,
+        tgl_lahir,
+        tempat_lahir,
+        alamat,
+        nama_ayah,
+        nama_ibu,
+        no_hp,
+        agama) 
+    VALUES(
+    '${nis}', 
+    '${nisn}', 
+    '${nama_siswa}', 
+    '${jenis_kelamin}', 
+    '${tgl_lahir}',
+    '${tempat_lahir}', 
+    '${alamat}', 
+    '${nama_ayah}',
+    '${nama_ibu}', 
+    '${no_hp}', 
     '${agama}')`
 
 connection.query(qry, (error, result) =>{
@@ -65,6 +82,7 @@ connection.query(qry, (error, result) =>{
 
 let editOneData = (req, res) => {
     let{
+        id_regist,
         nis,
         nisn,
         nama_siswa,
@@ -72,11 +90,10 @@ let editOneData = (req, res) => {
         tgl_lahir,
         tempat_lahir,
         alamat,
-        nama_orangtua,
-        no_hp1,
-        no_hp2,
+        nama_ayah,
+        nama_ibu,
+        no_hp,
         agama,
-        id_user,
     } = req.body
 
     let qry = `UPDATE siswa
@@ -84,15 +101,14 @@ let editOneData = (req, res) => {
             nisn = '${nisn}',
             nama_siswa = '${nama_siswa}',
             jenis_kelamin = '${jenis_kelamin}',
-            tanggal_lahir = '${tgl_lahir}',
+            tgl_lahir = '${tgl_lahir}',
             tempat_lahir = '${tempat_lahir}',
             alamat = '${alamat}',
-            nama_orangtua = '${nama_orangtua}',
-            no_hp1 = '${no_hp1}',
-            no_hp2 = '${no_hp2}',
-            agama = '${agama}',
-            id_user = '${id_user}'
-        WHERE nis = '${nis}'`
+            nama_ayah = '${nama_ayah}',
+            nama_ibu = '${nama_ibu}',
+            no_hp = '${no_hp}',
+            agama = '${agama}'
+        WHERE id_regist = '${id_regist}'`
 
 connection.query(qry, (error, result)=>{
     if (error) {
@@ -106,16 +122,16 @@ connection.query(qry, (error, result)=>{
 }
 
 let deleteOneData = (req, res) => {
-    let nis = req.Body.nis
+    let id_regist = req.body.id_regist
 
-    let qry = `DELETE FROM siswa WHERE nis = '${nis}'`
+    let qry = `DELETE FROM siswa WHERE id_regist = '${id_regist}'`
 
 connection.query(qry, (error, result) => {
     if (error) {
         console.log(error);
     } else {
         response.ok('Data Berhasil Dihapus', res)
-        console.log(result.affectedRows, 'Berhasil dihapus');
+        console.log(`Data Siswa ${id_regist} Berhasil dihapus`);
     }
 })
 }

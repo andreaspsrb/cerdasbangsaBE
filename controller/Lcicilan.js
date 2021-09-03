@@ -1,12 +1,7 @@
 'use strict';
 let response = require('../res/res');
 let connection = require('../config/connect');
-const multer = require('multer')
- const upload = multer({
-     dest:'public/img/cicilan'
- })
 
-exports.uploadImage = upload.single('photo');
 
 let getAllData = (req, res) => {
 

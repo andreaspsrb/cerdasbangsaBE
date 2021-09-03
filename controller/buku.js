@@ -1,12 +1,12 @@
 'use strict';
 let response = require('../res/res');
 let connection = require('../config/connect');
-const random = require('random-number')
+
 
 let getAllData = (req, res) => {
 
-    let qry = 'SELECT * FROM LaporanSPP';
-    connection.query(qry, (error, result, rows) => {
+    let qry = 'SELECT * FROM buku';
+    connection.query(qry, (error, result) => {
      if (error) {
          console.log(error);
      } else {
@@ -19,9 +19,9 @@ let getAllData = (req, res) => {
 
  let getOneByKode = (req, res) => {
 
-   let kode_spp = req.body.kode_spp    
+   let kode_bayar = req.body.kode_bayar    
 
-    let qry = `SELECT * FROM LaporanSPP WHERE kode_spp = '${kode_spp}'`;
+    let qry = `SELECT * FROM buku WHERE kode_bayar = '${kode_bayar}'`;
         connection.query(qry, (error, result) => {
          if (error) {
              console.log(error);
@@ -35,73 +35,74 @@ let getAllData = (req, res) => {
 
 
 let addOneData = (req, res) => {
-    let kode_spp = random.generator({
-        min:  0,
-        max:9999,
-        integer:true,
-    })
-
-    
-   
 
     let{
+        kode_bayar,
+        nis,
+        nisn,
+        nama,
         tgl_bayar,
-        bulan,	
-        jumlah,
-        ekstrakurikuler,
-        status,
+        buku,
+        debit,
+        kredit,
+        saldo,
         image,
-        nama_siswa,
-        kelas,
-    
         } = req.body
        
        
-        let qry = `INSERT INTO LaporanSPP
-        VALUES('${kode_spp()}',
+        let qry = `INSERT INTO Buku
+        (kode_bayar, nis,
+            nisn,nama,tgl_bayar, buku,debit, kredit,
+            saldo,image)
+        VALUES
+        ('${kode_bayar}',
+            '${nis}',	
+            '${nisn}',
+            '${nama}',
             '${tgl_bayar}',
-            '${bulan}',	
-            '${jumlah}',
-            '${ekstrakurikuler}',
-            '${status}',
-            '${image}',
-            '${nama_siswa}',
-            '${kelas}')`
+            '${buku}',
+            '${debit}',
+            '${kredit}',
+            '${saldo}',
+            '${image}')`
     
     connection.query(qry, (error, result) => {
      if (error) {
          console.log(error);
      } else {
          response.ok(result, res)
-         console.log(`Data ${nama_siswa} berhasil ditambahkan`);
+         console.log(`Data ${nama} berhasil ditambahkan`);
 
      }
  })
+ 
  }
 
  let editOneData = (req, res) => {
     let{
-        kode_spp,
+        kode_bayar,
+        nis,
+        nisn,
+        nama,
         tgl_bayar,
-        bulan,	
-        jumlah,
-        ekstrakurikuler,
-        status,
+        buku,
+        debit,
+        kredit,
+        saldo,
         image,
-        nama_siswa,
-        kelas,
     } = req.body
 
-    let qry = `UPDATE LaporanSPP
-        Set tgl_bayar = '${tgl_bayar}',
-            bulan = '${bulan}',	
-            jumlah = '${jumlah}',
-            ekstrakurikuler = '${ekstrakurikuler}',
-            status = '${status}',
-            image = '${image}',
-            nama_siswa = '${nama_siswa}',
-            kelas = '${kelas}'
-            WHERE kode_spp ='${kode_spp}'`
+    let qry = `UPDATE buku
+        Set nis = '${nis}',	
+            nisn = '${nisn}',
+            nama = '${nama}',
+            tgl_bayar = '${tgl_bayar}',
+            buku = '${buku}',
+            debit = '${debit}',
+            kredit = '${kredit}',
+            saldo = '${saldo}',
+            image  = '${image}'
+            WHERE kode_bayar = '${kode_bayar}'`
 
 connection.query(qry, (error, result)=>{
     if (error) {
@@ -115,37 +116,40 @@ connection.query(qry, (error, result)=>{
 }
 
 let deleteOneData = (req, res) => {
-    let kode_spp = req.body.kode_spp
+    let kode_bayar = req.body.kode_bayar
 
-    let qry = `DELETE FROM LaporanSPP WHERE kode_spp = '${kode_spp}'`
+    let qry = `DELETE FROM buku WHERE kode_bayar = '${kode_bayar}'`
 
 connection.query(qry, (error, result) => {
     if (error) {
         console.log(error);
     } else {
         response.ok('Data Berhasil Dihapus', res)
-        console.log(`Data SPP ${kode_spp} Berhasil dihapus`);
+        console.log(`Data Cicilan ${kode_bayar} Berhasil dihapus`);
     }
 })
 }
 
+
 let insertImage = (req, res) => {
 
     let{
-        kode_spp,
+        kode_bayar,
         image
         } = req.body
        
        try {
-        let qry = `INSERT INTO LaporanSPP (kode_spp, image) 
-        VALUES ('${kode_spp}', '${image}')`;
+
+
+        let qry = `INSERT INTO buku (kode_bayar, image) 
+        VALUES ('${kode_bayar}', '${image}')`;
     
     connection.query(qry, (error, result, rows) => {
      if (error) {
          console.log(error);
      } else {
          response.ok(result, res)
-         console.log(`Data ${nama_siswa} berhasil ditambahkan`);
+         console.log(`Data ${kode_bayar} berhasil ditambahkan`);
 
      }
  }) 

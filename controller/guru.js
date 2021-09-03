@@ -63,11 +63,10 @@ let editOneData = (req, res) => {
         lulusan,
         jabatan,
         status_karyawan,
-        agama,
-        id_user,
+        agama
     } = req.body
 
-    let qry = `UPDATE Guru
+    let qry = `UPDATE guru
         Set nama_guru = '${nama_guru}',
             jenis_kelamin = '${jenis_kelamin}',
             no_nuptk = '${no_nuptk}',
@@ -77,8 +76,7 @@ let editOneData = (req, res) => {
             lulusan = '${lulusan}',
             jabatan = '${jabatan}',
             status_karyawan = '${status_karyawan}',
-            agama = '${agama}',
-            id_user = '${id_user}'
+            agama = '${agama}'
             WHERE id_guru ='${id_guru}'`
 
 connection.query(qry, (error, result)=>{

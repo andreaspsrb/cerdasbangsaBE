@@ -6,7 +6,14 @@ const morgan = require('morgan');
 const cors = require('cors');
 const ejs = require('ejs');
 
-// app.option('*', cors());
+// const http = require('http')
+// const path = require('path')
+// const busboy = require("then-busboy")
+// const fileUpload = require('express-fileupload')
+
+
+
+// // app.option('*', cors());
 
 let dotenv = require('dotenv');
 let env = dotenv.config();
@@ -19,6 +26,8 @@ app.set('view_engine', 'ejs')
 
 app.use(cors())
 app.use(morgan('dev'));
+
+
 
 app.use('/', require('./router/router'))
 
