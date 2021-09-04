@@ -102,15 +102,16 @@ let addOneData = (req, res) => {
  let login = (req, res) => {
     let { username,
          password } = req.body
- 
+
      let qry =`SELECT u.username, u.password, u.role, s.* FROM User u 
      INNER JOIN siswa s ON s.nis = u.username
-      WHERE .username = '${username}' AND password = '${password}'`
+    WHERE .username = '${username}' AND password = '${password}'`
      
     //  `SELECT username, password, role FROM User WHERE username = '${username}' AND password = '${password}'`
  
      connection.query(qry, (error, result) => {
       if (result.length > 0) {
+
          let data = {
              'status': 200,
              'message' :'success',

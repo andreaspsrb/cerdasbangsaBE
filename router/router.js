@@ -10,6 +10,7 @@ const inventaris = require("../controller/Linventaris");
 const bulanan = require("../controller/Bulanan");
 const RegistrasiProses = require("../controller/RegistrasiProses");
 const buku = require("../controller/buku");
+const seragam = require("../controller/seragam");
 
 
 // API USER
@@ -78,6 +79,14 @@ router.post("/addOnebuku", buku.addOneData);
 router.post("/editonebuku", buku.editOneData);
 router.post("/deleteonebuku", buku.deleteOneData);
 router.post("/uploadImgbuku", buku.insertImage)
+
+//API Seragam
+router.get("/getseragam", seragam.getAllData);
+router.post("/getbukubyKode", seragam.getOneByKode);
+router.post("/addOneseragam", seragam.addOneData);
+router.post("/editoneseragam", seragam.editOneData);
+router.post("/deleteoneseragam", seragam.deleteOneData);
+router.post("/uploadImgseragam", seragam.insertImage)
 // LOGIN
 // REGISTRASI AKUN
 // REGISTRASI SISWA BARU

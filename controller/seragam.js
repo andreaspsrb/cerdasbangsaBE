@@ -5,7 +5,7 @@ let connection = require('../config/connect');
 
 let getAllData = (req, res) => {
 
-    let qry = 'SELECT * FROM LaporanCicilan';
+    let qry = 'SELECT * FROM seragam';
     connection.query(qry, (error, result) => {
      if (error) {
          console.log(error);
@@ -19,9 +19,9 @@ let getAllData = (req, res) => {
 
  let getOneByKode = (req, res) => {
 
-   let kode_cicilan = req.body.kode_cicilan    
+   let kode_bayar = req.body.kode_bayar    
 
-    let qry = `SELECT * FROM LaporanCicilan WHERE kode_cicilan = '${kode_cicilan}'`;
+    let qry = `SELECT * FROM seragam WHERE kode_bayar = '${kode_bayar}'`;
         connection.query(qry, (error, result) => {
          if (error) {
              console.log(error);
@@ -37,42 +37,32 @@ let getAllData = (req, res) => {
 let addOneData = (req, res) => {
 
     let{
-        kode_cicilan,
-        student_account,
+        kode_bayar,
         nis,
         nisn,
         nama,
         tgl_bayar,
-        buku,
-        voucher_no,
+        seragam,
         debit,
         kredit,
-        uang_pangkal,
-        seragam,
         saldo,
         image,
         } = req.body
        
        
-        let qry = `INSERT INTO LaporanCicilan
-        (kode_cicilan,student_account,nis,
-            nisn,nama,tgl_bayar, buku,
-            voucher_no,debit, kredit,
-            uang_pangkal,seragam,
+        let qry = `INSERT INTO seragam
+        (kode_bayar, nis,
+            nisn,nama,tgl_bayar, seragam,debit, kredit,
             saldo,image)
         VALUES
-        ('${kode_cicilan}',
-            '${student_account}',
+        ('${kode_bayar}',
             '${nis}',	
             '${nisn}',
             '${nama}',
             '${tgl_bayar}',
-            '${buku}',
-            '${voucher_no}',
+            '${seragam}',
             '${debit}',
             '${kredit}',
-            '${uang_pangkal}',
-            '${seragam}',
             '${saldo}',
             '${image}')`
     
@@ -90,37 +80,29 @@ let addOneData = (req, res) => {
 
  let editOneData = (req, res) => {
     let{
-        kode_cicilan,
-        student_account,
+        kode_bayar,
         nis,
         nisn,
         nama,
         tgl_bayar,
-        buku,
-        voucher_no,
+        seragam,
         debit,
         kredit,
-        uang_pangkal,
-        seragam,
         saldo,
         image,
     } = req.body
 
-    let qry = `UPDATE LaporanCicilan
-        Set student_account = '${student_account}',
-            nis = '${nis}',	
+    let qry = `UPDATE seragam
+        Set nis = '${nis}',	
             nisn = '${nisn}',
             nama = '${nama}',
             tgl_bayar = '${tgl_bayar}',
-            buku = '${buku}',
-            voucher_no = '${voucher_no}',
+            seragam = '${seragam}',
             debit = '${debit}',
             kredit = '${kredit}',
-            uang_pangkal = '${uang_pangkal}',
-            seragam = '${seragam}',
             saldo = '${saldo}',
             image  = '${image}'
-            WHERE kode_cicilan = '${kode_cicilan}'`
+            WHERE kode_bayar = '${kode_bayar}'`
 
 connection.query(qry, (error, result)=>{
     if (error) {
@@ -134,16 +116,16 @@ connection.query(qry, (error, result)=>{
 }
 
 let deleteOneData = (req, res) => {
-    let kode_cicilan = req.body.kode_cicilan
+    let kode_bayar = req.body.kode_bayar
 
-    let qry = `DELETE FROM LaporanCicilan WHERE kode_cicilan = '${kode_cicilan}'`
+    let qry = `DELETE FROM seragam WHERE kode_bayar = '${kode_bayar}'`
 
 connection.query(qry, (error, result) => {
     if (error) {
         console.log(error);
     } else {
         response.ok('Data Berhasil Dihapus', res)
-        console.log(`Data Cicilan ${kode_cicilan} Berhasil dihapus`);
+        console.log(`Data Cicilan ${kode_bayar} Berhasil dihapus`);
     }
 })
 }
@@ -152,22 +134,22 @@ connection.query(qry, (error, result) => {
 let insertImage = (req, res) => {
 
     let{
-        kode_cicilan,
+        kode_bayar,
         image
         } = req.body
        
        try {
 
 
-        let qry = `INSERT INTO LaporanCicilan (kode_cicilan, image) 
-        VALUES ('${kode_cicilan}', '${image}')`;
+        let qry = `INSERT INTO seragam (kode_bayar, image) 
+        VALUES ('${kode_bayar}', '${image}')`;
     
     connection.query(qry, (error, result, rows) => {
      if (error) {
          console.log(error);
      } else {
          response.ok(result, res)
-         console.log(`Data ${kode_cicilan} berhasil ditambahkan`);
+         console.log(`Data ${kode_bayar} berhasil ditambahkan`);
 
      }
  }) 
