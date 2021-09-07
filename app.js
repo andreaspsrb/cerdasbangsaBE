@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
-
+const path = require('path')
 const cors = require('cors');
 const ejs = require('ejs');
 
@@ -20,6 +20,10 @@ let env = dotenv.config();
 
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname,'public')));
+app.use(express.static('./public/uploads'));
+
+
 
 app.set(ejs)
 app.set('view_engine', 'ejs')

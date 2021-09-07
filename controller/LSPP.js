@@ -50,13 +50,12 @@ let addOneData = (req, res) => {
         jumlah,
         ekstrakurikuler,
         status,
-        image,
         nama_siswa,
         kelas,
     
         } = req.body
-       
-       
+       let image = req.file.filename
+       console.log(image);
         let qry = `INSERT INTO LaporanSPP
         VALUES('${kode_spp()}',
             '${tgl_bayar}',

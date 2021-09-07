@@ -11,6 +11,8 @@ const bulanan = require("../controller/Bulanan");
 const RegistrasiProses = require("../controller/RegistrasiProses");
 const buku = require("../controller/buku");
 const seragam = require("../controller/seragam");
+const multer = require('multer');
+const path = require('path');
 
 
 // API USER
@@ -41,9 +43,22 @@ router.post("/editoneguru", guru.editOneData);
 router.post("/deleteoneguru", guru.deleteOneData);
 
 //API Laporan SPP
+
+const storage = multer.diskStorage({
+    destination:(req,file,cb)=>{
+        cb(null,path.join(__dirname,'../public/upload'));
+    },
+    filename:(req,file,cb)=>{
+        cb(null,Date.now() + path.extname(file.originalname))
+    }
+});
+
+
+const upload = multer({storage:storage});
+
 router.get("/getLaporanSPP", lspp.getAllData);
 router.post("/getSPPbyKode", lspp.getOneByKode);
-router.post("/addOneLaporanSPP", lspp.addOneData);
+router.post("/addOneLaporanSPP",upload.single("filename"), lspp.addOneData);
 router.post("/editonespp", lspp.editOneData);
 router.post("/deleteonespp", lspp.deleteOneData);
 router.post("/uploadImgSPP", lspp.insertImage)
@@ -51,7 +66,7 @@ router.post("/uploadImgSPP", lspp.insertImage)
 //API Laporan Cicilan
 router.get("/getLaporanCicilan", lcicilan.getAllData);
 router.post("/getCicilanbyKode", lcicilan.getOneByKode);
-router.post("/addOneLaporanCicilan", lcicilan.addOneData);
+router.post("/addOneLaporanCicilan",lcicilan.addOneData);
 router.post("/editonecicilan", lcicilan.editOneData);
 router.post("/deleteonecicilan", lcicilan.deleteOneData);
 router.post("/uploadImgCicilan", lcicilan.insertImage)
