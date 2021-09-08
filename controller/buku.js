@@ -1,6 +1,7 @@
 'use strict';
 let response = require('../res/res');
 let connection = require('../config/connect');
+const random = require('random-number')
 
 
 let getAllData = (req, res) => {
@@ -35,9 +36,12 @@ let getAllData = (req, res) => {
 
 
 let addOneData = (req, res) => {
-
+    let kode_bayar = random.generator({
+        min:  0,
+        max:9999,
+        integer:true,
+    })
     let{
-        kode_bayar,
         nis,
         nisn,
         nama,
@@ -46,16 +50,16 @@ let addOneData = (req, res) => {
         debit,
         kredit,
         saldo,
-        image,
-        } = req.body
-       
-       
+        
+        } =  req.body
+        let image = req.protocol + "://" + req.get("host") +"/upload/" + req.file.filename
+       console.log(image);
         let qry = `INSERT INTO Buku
         (kode_bayar, nis,
             nisn,nama,tgl_bayar, buku,debit, kredit,
             saldo,image)
         VALUES
-        ('${kode_bayar}',
+        ('${kode_bayar()}',
             '${nis}',	
             '${nisn}',
             '${nama}',

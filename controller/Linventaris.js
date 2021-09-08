@@ -1,12 +1,6 @@
 'use strict';
 let response = require('../res/res');
 let connection = require('../config/connect');
-const multer = require('multer')
- const upload = multer({
-     dest:'public/img/inventaris'
- })
-
-exports.uploadImage = upload.single('photo');
 
 let getAllData = (req, res) => {
 
@@ -49,11 +43,11 @@ let addOneData = (req, res) => {
         catatan,
         tahun_ajaran,
         wali_kelas,
-        image,
+      
     
         } = req.body
-       
-       
+        let image = req.protocol + "://" + req.get("host") +"/upload/" + req.file.filename
+       console.log(image);
         let qry = `INSERT INTO LaporanInventaris
         ( kode_inventaris,tgl_pembelian,
             keterangan,	jumlah,

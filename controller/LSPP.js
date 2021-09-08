@@ -18,10 +18,9 @@ let getAllData = (req, res) => {
  }
 
  let getOneByKode = (req, res) => {
-
-   let kode_spp = req.body.kode_spp    
-
-    let qry = `SELECT * FROM LaporanSPP WHERE kode_spp = '${kode_spp}'`;
+    let kode_spp = req.body 
+    let qry = 
+    `SELECT  * FROM LaporanSPP WHERE kode_spp = '${kode_spp}'`;
         connection.query(qry, (error, result) => {
          if (error) {
              console.log(error);
@@ -40,10 +39,6 @@ let addOneData = (req, res) => {
         max:9999,
         integer:true,
     })
-
-    
-   
-
     let{
         tgl_bayar,
         bulan,	
@@ -52,9 +47,10 @@ let addOneData = (req, res) => {
         status,
         nama_siswa,
         kelas,
+        id_user,
     
         } = req.body
-       let image = req.file.filename
+       let image = req.protocol + "://" + req.get("host") +"/upload/" + req.file.filename
        console.log(image);
         let qry = `INSERT INTO LaporanSPP
         VALUES('${kode_spp()}',
@@ -65,7 +61,8 @@ let addOneData = (req, res) => {
             '${status}',
             '${image}',
             '${nama_siswa}',
-            '${kelas}')`
+            '${kelas}',
+            '${id_user}')`
     
     connection.query(qry, (error, result) => {
      if (error) {

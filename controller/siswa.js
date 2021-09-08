@@ -44,6 +44,7 @@ let addOneData = (req, res) => {
         nama_ibu,
         no_hp,
         agama,
+        kelas,
     } = req.body
 
     let qry = `INSERT INTO siswa ( nis,
@@ -56,6 +57,7 @@ let addOneData = (req, res) => {
         nama_ayah,
         nama_ibu,
         no_hp,
+        kelas,
         agama) 
     VALUES(
     '${nis}', 
@@ -68,6 +70,7 @@ let addOneData = (req, res) => {
     '${nama_ayah}',
     '${nama_ibu}', 
     '${no_hp}', 
+    '${kelas}',
     '${agama}')`
 
 connection.query(qry, (error, result) =>{
@@ -93,6 +96,7 @@ let editOneData = (req, res) => {
         nama_ayah,
         nama_ibu,
         no_hp,
+        kelas,
         agama,
     } = req.body
 
@@ -100,6 +104,7 @@ let editOneData = (req, res) => {
         Set nis = '${nis}',
             nisn = '${nisn}',
             nama_siswa = '${nama_siswa}',
+            kelas = '${kelas}',
             jenis_kelamin = '${jenis_kelamin}',
             tgl_lahir = '${tgl_lahir}',
             tempat_lahir = '${tempat_lahir}',

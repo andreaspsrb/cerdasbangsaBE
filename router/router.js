@@ -52,8 +52,6 @@ const storage = multer.diskStorage({
         cb(null,Date.now() + path.extname(file.originalname))
     }
 });
-
-
 const upload = multer({storage:storage});
 
 router.get("/getLaporanSPP", lspp.getAllData);
@@ -66,7 +64,7 @@ router.post("/uploadImgSPP", lspp.insertImage)
 //API Laporan Cicilan
 router.get("/getLaporanCicilan", lcicilan.getAllData);
 router.post("/getCicilanbyKode", lcicilan.getOneByKode);
-router.post("/addOneLaporanCicilan",lcicilan.addOneData);
+router.post("/addOneLaporanCicilan",upload.single("filename"),lcicilan.addOneData);
 router.post("/editonecicilan", lcicilan.editOneData);
 router.post("/deleteonecicilan", lcicilan.deleteOneData);
 router.post("/uploadImgCicilan", lcicilan.insertImage)
@@ -74,7 +72,7 @@ router.post("/uploadImgCicilan", lcicilan.insertImage)
 //API Laporan Inventaris
 router.get("/getLaporanInventaris", inventaris.getAllData);
 router.post("/getInventarisbyKode", inventaris.getOneByKode);
-router.post("/addOneLaporanInventaris", inventaris.addOneData);
+router.post("/addOneLaporanInventaris",upload.single("filename"), inventaris.addOneData);
 router.post("/editoneinventaris", inventaris.editOneData);
 router.post("/deleteoneinventaris", inventaris.deleteOneData);
 router.post("/uploadImgInventaris", inventaris.insertImage)
@@ -90,15 +88,15 @@ router.post("/uploadImgBulanan", bulanan.insertImage)
 //API Buku
 router.get("/getbuku", buku.getAllData);
 router.post("/getbukubyKode", buku.getOneByKode);
-router.post("/addOnebuku", buku.addOneData);
+router.post("/addOnebuku",upload.single("filename"), buku.addOneData);
 router.post("/editonebuku", buku.editOneData);
 router.post("/deleteonebuku", buku.deleteOneData);
 router.post("/uploadImgbuku", buku.insertImage)
 
 //API Seragam
 router.get("/getseragam", seragam.getAllData);
-router.post("/getbukubyKode", seragam.getOneByKode);
-router.post("/addOneseragam", seragam.addOneData);
+router.post("/getseragambyKode", seragam.getOneByKode);
+router.post("/addOneseragam",upload.single("filename"), seragam.addOneData);
 router.post("/editoneseragam", seragam.editOneData);
 router.post("/deleteoneseragam", seragam.deleteOneData);
 router.post("/uploadImgseragam", seragam.insertImage)
